@@ -1,0 +1,91 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://noise_distorted.png" type="Image" id=1]
+
+[sub_resource type="VoxelStreamImage" id=9]
+image = ExtResource( 1 )
+
+[sub_resource type="Voxel" id=10]
+voxel_name = "air"
+transparent = true
+
+[sub_resource type="Voxel" id=11]
+voxel_name = "solid"
+geometry_type = 1
+cube_geometry/padding_y = 0.0
+cube_tiles/left = Vector2( 0, 0 )
+cube_tiles/right = Vector2( 0, 0 )
+cube_tiles/bottom = Vector2( 0, 0 )
+cube_tiles/top = Vector2( 0, 0 )
+cube_tiles/back = Vector2( 0, 0 )
+cube_tiles/front = Vector2( 0, 0 )
+
+[sub_resource type="VoxelLibrary" id=12]
+voxels/0 = SubResource( 10 )
+voxels/1 = SubResource( 11 )
+
+[sub_resource type="CubeMesh" id=6]
+
+[sub_resource type="Environment" id=8]
+background_mode = 1
+background_color = Color( 0.09, 0.096, 0.12, 1 )
+background_energy = 0.0
+ambient_light_color = Color( 0.0114, 0.0145533, 0.02, 1 )
+ambient_light_energy = 0.0
+fog_enabled = true
+fog_color = Color( 0.216, 0.2566, 0.3, 1 )
+fog_sun_color = Color( 1, 0.717647, 0.419608, 1 )
+fog_sun_amount = 0.41
+fog_depth_begin = 0.0
+fog_depth_end = 300.0
+fog_depth_curve = 0.784584
+fog_transmit_enabled = true
+fog_transmit_curve = 9.18959
+glow_enabled = true
+glow_levels/1 = true
+glow_levels/5 = false
+glow_intensity = 8.0
+glow_bloom = 1.0
+glow_hdr_threshold = 0.0
+glow_hdr_luminance_cap = 256.0
+glow_hdr_scale = 2.99
+
+[node name="Spatial" type="Spatial"]
+
+[node name="VoxelTerrain" type="VoxelTerrain" parent="."]
+stream = SubResource( 9 )
+voxel_library = SubResource( 12 )
+view_distance = 1024
+viewer_path = NodePath("../Camera")
+generate_collisions = false
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 75, 80.7111 )
+far = 200.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="OmniLight" type="OmniLight" parent="Camera"]
+light_color = Color( 0.1265, 0.18515, 0.23, 1 )
+omni_range = 500.0
+omni_attenuation = 19.0273
+
+[node name="Cube1" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 55.6275, -87.3904 )
+mesh = SubResource( 6 )
+material/0 = null
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 8 )
+
+[node name="OmniLight2" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 64.0038, -95.983 )
+light_color = Color( 1, 0.423529, 0, 1 )
+light_energy = 11.91
+shadow_enabled = true
+shadow_bias = 0.11
+shadow_contact = 4.76
+shadow_reverse_cull_face = true
+omni_range = 500.0
+omni_attenuation = 24.2515
