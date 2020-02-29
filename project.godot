@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "VoxelStream",
+"class": "UniverseGen",
+"language": "GDScript",
+"path": "res://universe_gen.gd"
+} ]
 _global_script_class_icons={
-
+"UniverseGen": ""
 }
 
 [application]

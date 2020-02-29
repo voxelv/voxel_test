@@ -1,5 +1,7 @@
 extends Spatial
 
+onready var inner_gimbal = find_node("inner_gimbal")
+
 export (float, 0.0, 2.0) var rotation_speed = PI/2
 
 # mouse properties
@@ -50,7 +52,7 @@ func _process(delta):
 	
 	if !mouse_control:
 		get_input_keyboard(delta)
-	$inner_gimbal.rotation.x = clamp($inner_gimbal.rotation.x, deg2rad(-90), deg2rad(90))
+	inner_gimbal.rotation.x = clamp(inner_gimbal.rotation.x, deg2rad(-90), deg2rad(90))
 	scale = lerp(scale, Vector3.ONE * zoom, zoom_speed)
 
 func _unhandled_input(event):
@@ -67,7 +69,7 @@ func _unhandled_input(event):
 			if event.relative.y != 0:
 				var dir = 1 if invert_y else -1
 				var y_rotation = clamp(event.relative.y, -30, 30)
-				$inner_gimbal.rotate_object_local(Vector3.RIGHT, dir * y_rotation * mouse_sensitivity)
+				inner_gimbal.rotate_object_local(Vector3.RIGHT, dir * y_rotation * mouse_sensitivity)
 	
 	if event.is_action_pressed("cam_zoom_in"):
 		zoom -= zoom_speed
