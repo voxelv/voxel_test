@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://noise_distorted.png" type="Image" id=1]
 [ext_resource path="res://main_camera.gd" type="Script" id=2]
@@ -27,6 +27,9 @@ voxels/1 = SubResource( 3 )
 
 [sub_resource type="CubeMesh" id=5]
 size = Vector3( 1, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=7]
+albedo_color = Color( 1, 0, 0, 1 )
 
 [sub_resource type="Environment" id=6]
 background_mode = 1
@@ -68,7 +71,6 @@ __meta__ = {
 "_edit_group_": true
 }
 mouse_control = true
-fly_speed = 20.0
 
 [node name="OmniLight" type="OmniLight" parent="player"]
 light_color = Color( 0.1265, 0.18515, 0.23, 1 )
@@ -86,12 +88,25 @@ far = 300.0
 [node name="Cube1" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 56, -87 )
 mesh = SubResource( 5 )
-material/0 = null
+material/0 = SubResource( 7 )
 
-[node name="corelight" type="Spatial" parent="Cube1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8517, 10.2431, 0 )
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 6 )
 
-[node name="color" type="OmniLight" parent="Cube1/corelight"]
+[node name="corelight" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8517, 66.2431, -87 )
+
+[node name="white" type="OmniLight" parent="corelight"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.94364, 0, 61.8076 )
+light_bake_mode = 0
+shadow_enabled = true
+shadow_bias = 0.11
+shadow_contact = 4.76
+shadow_reverse_cull_face = true
+omni_range = 100.0
+omni_attenuation = 6.06284
+
+[node name="color" type="OmniLight" parent="corelight/white"]
 light_color = Color( 0, 1, 0.976471, 1 )
 light_bake_mode = 0
 shadow_enabled = true
@@ -101,7 +116,8 @@ shadow_reverse_cull_face = true
 omni_range = 200.0
 omni_attenuation = 3.24901
 
-[node name="white" type="OmniLight" parent="Cube1/corelight"]
+[node name="white2" type="OmniLight" parent="corelight"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -149.061 )
 light_bake_mode = 0
 shadow_enabled = true
 shadow_bias = 0.11
@@ -110,5 +126,32 @@ shadow_reverse_cull_face = true
 omni_range = 100.0
 omni_attenuation = 6.06284
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 6 )
+[node name="color" type="OmniLight" parent="corelight/white2"]
+light_color = Color( 1, 0.494118, 0, 1 )
+light_bake_mode = 0
+shadow_enabled = true
+shadow_bias = 0.11
+shadow_contact = 4.76
+shadow_reverse_cull_face = true
+omni_range = 200.0
+omni_attenuation = 3.24901
+
+[node name="white3" type="OmniLight" parent="corelight"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.6376, -35.632, -121.791 )
+light_bake_mode = 0
+shadow_enabled = true
+shadow_bias = 0.11
+shadow_contact = 4.76
+shadow_reverse_cull_face = true
+omni_range = 100.0
+omni_attenuation = 6.06284
+
+[node name="color" type="OmniLight" parent="corelight/white3"]
+light_color = Color( 1, 0, 0, 1 )
+light_bake_mode = 0
+shadow_enabled = true
+shadow_bias = 0.11
+shadow_contact = 4.76
+shadow_reverse_cull_face = true
+omni_range = 200.0
+omni_attenuation = 3.24901
