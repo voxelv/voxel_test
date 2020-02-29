@@ -30,6 +30,14 @@ size = Vector3( 1, 1, 1 )
 
 [sub_resource type="SpatialMaterial" id=7]
 albedo_color = Color( 1, 0, 0, 1 )
+emission_enabled = true
+emission = Color( 0.215686, 1, 1, 1 )
+emission_energy = 10.52
+emission_operator = 0
+emission_on_uv2 = false
+detail_enabled = true
+detail_blend_mode = 0
+detail_uv_layer = 0
 
 [sub_resource type="Environment" id=6]
 background_mode = 1
@@ -39,21 +47,21 @@ ambient_light_color = Color( 0.0114, 0.0145533, 0.02, 1 )
 ambient_light_energy = 0.0
 fog_enabled = true
 fog_color = Color( 0.0862745, 0.0862745, 0.0862745, 1 )
-fog_sun_color = Color( 1, 0.717647, 0.419608, 1 )
-fog_sun_amount = 0.41
 fog_depth_begin = 0.0
-fog_depth_end = 200.0
-fog_depth_curve = 0.784584
+fog_depth_end = 380.0
 fog_transmit_enabled = true
-fog_transmit_curve = 9.18959
+fog_transmit_curve = 0.176777
+auto_exposure_scale = 0.1
+auto_exposure_speed = 23.06
 glow_enabled = true
 glow_levels/1 = true
-glow_levels/5 = false
-glow_intensity = 8.0
-glow_bloom = 1.0
-glow_hdr_threshold = 0.0
-glow_hdr_luminance_cap = 256.0
-glow_hdr_scale = 2.99
+glow_levels/2 = true
+glow_levels/4 = true
+glow_levels/6 = true
+glow_levels/7 = true
+glow_intensity = 0.02
+glow_blend_mode = 1
+glow_bicubic_upscale = true
 
 [node name="Spatial" type="Spatial"]
 
@@ -83,38 +91,40 @@ transform = Transform( 1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, 0, 0, 0 )
 [node name="Camera" type="Camera" parent="player/inner_gimbal"]
 transform = Transform( 1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0 )
 current = true
-far = 300.0
+far = 400.0
 
 [node name="Cube1" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 56, -87 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 55.6149, -86.9585 )
+cast_shadow = 0
 mesh = SubResource( 5 )
 material/0 = SubResource( 7 )
+
+[node name="white" type="OmniLight" parent="Cube1"]
+light_indirect_energy = 0.0
+light_specular = 0.0
+light_bake_mode = 0
+shadow_bias = 0.11
+shadow_contact = 4.76
+shadow_reverse_cull_face = true
+omni_range = 200.0
+omni_attenuation = 30.0
+
+[node name="color" type="OmniLight" parent="Cube1/white"]
+light_color = Color( 0, 1, 0.976471, 1 )
+light_indirect_energy = 0.0
+light_specular = 0.0
+light_bake_mode = 0
+shadow_bias = 0.11
+shadow_contact = 4.76
+shadow_reverse_cull_face = true
+omni_range = 141.3
+omni_attenuation = 6.9644
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 6 )
 
 [node name="corelight" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8517, 66.2431, -87 )
-
-[node name="white" type="OmniLight" parent="corelight"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.94364, 0, 61.8076 )
-light_bake_mode = 0
-shadow_enabled = true
-shadow_bias = 0.11
-shadow_contact = 4.76
-shadow_reverse_cull_face = true
-omni_range = 100.0
-omni_attenuation = 6.06284
-
-[node name="color" type="OmniLight" parent="corelight/white"]
-light_color = Color( 0, 1, 0.976471, 1 )
-light_bake_mode = 0
-shadow_enabled = true
-shadow_bias = 0.11
-shadow_contact = 4.76
-shadow_reverse_cull_face = true
-omni_range = 200.0
-omni_attenuation = 3.24901
 
 [node name="white2" type="OmniLight" parent="corelight"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -149.061 )
