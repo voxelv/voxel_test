@@ -11,6 +11,6 @@ func _ready():
 	print(main_camera.get_path())
 	terrain.stream = Gen.new()
 	terrain.voxel_library = VoxelLibrary.new()
-	terrain.view_distance = 192
+	terrain.view_distance = 384
 	terrain.viewer_path = main_camera.get_path()
 	terrain_link.add_child(terrain)
