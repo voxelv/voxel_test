@@ -11,6 +11,8 @@ func emerge_block(buffer:VoxelBuffer, origin:Vector3, lod:int) -> void:
 #	if origin.y < 0:
 #		buffer.fill(1, channel)
 #	else:
+#	if Vector3.ZERO.distance_squared_to(origin) > (350*350):
+#		buffer.fill(1, channel)
 	for x in range(buffer.get_size_x()):
 		for y in range(buffer.get_size_y()):
 			for z in range(buffer.get_size_z()):
