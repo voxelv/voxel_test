@@ -13,4 +13,5 @@ func _ready():
 	terrain.voxel_library = VoxelLibrary.new()
 	terrain.view_distance = 192
 	terrain.viewer_path = main_camera.get_path()
+	terrain.generate_collisions = false
 	terrain_link.add_child(terrain)
