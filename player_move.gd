@@ -1,11 +1,12 @@
 extends KinematicBody
 
 # fly settings
-export (float) var fly_speed = 1.0
-export (float) var fly_accel = 1.0
+export(float) var fly_speed = 1.0
+export(float) var fly_accel = 1.0
 
 # nodes to reference
 onready var camera_control = find_node("camera_control")
+onready var near_vertices = find_node("near_vertices")
 
 # movement vars
 var input_dir := Vector3()
@@ -46,7 +47,7 @@ func process_input(delta:float)->void:
 		accel = camera_control.transform.xform(input_dir) * fly_accel * delta
 		accel = accel
 	else:
-		time_since_last_input += fly_accel * delta * 0.5
+		time_since_last_input += fly_accel * delta * 0.01
 #		vel = Vector3.ZERO
 		accel = Vector3.ZERO
 
@@ -54,7 +55,7 @@ func process_movement(delta:float)->void:
 	# Change velocity based on acceleration
 	vel += accel
 	#-----velocity direction--velocity magnitude--------------------tend toward zero velocity-------------
-	vel = vel.normalized() * (clamp(vel.length(), 0.0, fly_speed) * clamp(lerp(1.0, 0.0, time_since_last_input), 0.0, 1.0))
+	vel = vel.normalized() * (clamp(vel.length(), 0.0, fly_speed) * lerp(1.0, 0.0, time_since_last_input))
 	
 	# Change position based on velocity
 #	translate(vel)

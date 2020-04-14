@@ -1,7 +1,7 @@
 extends VoxelStream
 class_name UniverseGen
 
-const opts = [0, 1, 4, 8, 16]
+const opts = [1, 4, 8, 16]
 const opts_cnt = len(opts)
 
 export var channel:int = VoxelBuffer.CHANNEL_TYPE
